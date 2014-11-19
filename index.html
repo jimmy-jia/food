@@ -1,0 +1,52 @@
+<!doctype HTML>
+<html>
+	<head>
+		<title>Food @ Champaign-Urbana</title>
+		<meta charset="utf-8">
+		<link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<link href="stylesheet.css" rel="stylesheet" type="text/css">
+		<link rel="icon" href="favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="top">
+				<a href="index.html" id="logo">foodseeker</a>
+				<ul class="nav">
+					<li><a href="#">map</a></li>
+					<li><a href="#">home</a></li>
+					<li><a href="about.html">about</a></li>
+					<li><a href="stores.html">stores</a></li>
+				</ul>
+			</div>
+			<div class="center">
+				<p class="title">Welcome to FoodSeeker</p>
+				<p class="subtitle">Seeking food in Urbana-Champaign</p>
+				<p class="help">No idea what to eat? Don't worry, we got you.</p>
+				<form class="sbar" id ="submitform">
+					<input type='text' id='Input' placeholder='What are you in the mood for?'>
+					<input type='submit' id='button' value="Send" onclick="search()">
+				</form>
+				<script type="text/javascript">
+					function search(){
+						var search_input=document.getElementByID('Input');
+						var searchstyle = search_input.style;
+						searchstyle.backgroundColor="red";
+					}
+					//document.forms["submitform"].onsubmit=
+
+
+
+				</script>
+			</div>
+
+
+		</div>
+
+
+	</body>
+</html>
