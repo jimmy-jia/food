@@ -1,4 +1,4 @@
-<!doctype HTML>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Food @ Champaign-Urbana</title>
@@ -24,21 +24,59 @@
 				</ul>
 			</div>
 			<div class="center">
-				<p class="title">Welcome to FoodSeeker</p>
+				<p class="title">Welcome to <span id="lobo">foodseeker</span></p>
 				<p class="subtitle">Seeking food in Urbana-Champaign</p>
 				<p class="help">No idea what to eat? Don't worry, we got you.</p>
 				<form class="sbar" id ="submitform">
 					<input type='text' id='Input' placeholder='What are you in the mood for?'>
-					<input type='submit' id='button' value="Send" onclick="search()">
+					<input type='button' id='button' value="Send" onclick="getLocation()">
 				</form>
-				<script type="text/javascript">
-					function search(){
-						var search_input=document.getElementByID('Input');
-						var searchstyle = search_input.style;
-						searchstyle.backgroundColor="red";
+				<p id="errorshow"></p>
+				<p id="testing"></p>
+				<script>
+					var errorshow = document.getElementById('errorshow');
+					function getLocation() {
+						$(errorshow).fadeOut(400);
+					    if (navigator.geolocation) {
+					        navigator.geolocation.getCurrentPosition(showPosition, showError);
+					    } else {
+					        errorshow.innerHTML = "Geolocation is not supported by this browser.";
+					    }
+					    search();
 					}
-					//document.forms["submitform"].onsubmit=
-
+					function showPosition(position) {
+					    errorshow.innerHTML = "Latitude: " + position.coords.latitude + 
+					    "<br>Longitude: " + position.coords.longitude; 
+					}
+					function showError(error) {
+						//errorshow.style.display="block";
+					    switch(error.code) {
+					        case error.PERMISSION_DENIED:
+					            errorshow.innerHTML = "User or browser denied the request for Geolocation. Please try again."
+					            break;
+					        case error.POSITION_UNAVAILABLE:
+					            errorshow.innerHTML = "Location information is unavailable."
+					            break;
+					        case error.TIMEOUT:
+					            errorshow.innerHTML = "The request to get user location timed out."
+					            break;
+					        case error.UNKNOWN_ERROR:
+					            errorshow.innerHTML = "An unknown error occurred."
+					            break;
+					    }
+					    $(errorshow).fadeIn(400, askloc());
+					}
+				</script>
+				<script>
+					function search(){
+						var search_input=document.getElementById('submitform');
+						var text  ="";
+							text+= search_input.elements[0].value;
+						document.getElementById("testing").innerHTML = text;
+					}
+					function askloc(){
+						//email parents or something about going to chicago
+					}
 
 
 				</script>

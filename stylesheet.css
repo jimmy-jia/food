@@ -71,7 +71,7 @@ input[type=text]{
 	color:#575757;
 	text-align:center;
 }
-input[type=submit]{
+input[type=button]{
 	height:41px;
 	background-color:#f2f2f2;
 	border:2px solid #e7e7e7;
@@ -90,8 +90,24 @@ input[type=submit]{
 	color:white;
 	transition:color .4s;
 }
+#lobo{
+	font-family:'Lobster';
+	margin-left:10px;
+	font-size:110%;
+}
+#demo{
+	height:100px;
+	width:100px;
+	background-color:orange;
+	margin-left:auto;
+	margin-right:auto;
+}
+#errorshow{
+	display:none;
+	margin-top:30px;
+}
 #logo:hover{
-	color:#4499cc;
+	color:#ffaaaa;
 	text-shadow:1px 0px #66aaff;
 }
 /*Flex*/
