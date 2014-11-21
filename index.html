@@ -16,12 +16,11 @@
 		<div class="wrapper">
 			<div class="top">
 				<a href="index.html" id="logo">foodseeker</a>
-				<ul class="nav">
-					<li><a href="#">map</a></li>
-					<li><a href="#">home</a></li>
-					<li><a href="about.html">about</a></li>
-					<li><a href="stores.html">stores</a></li>
-				</ul>
+					<ul class="nav">
+						<li><a href="#">home</a></li>
+						<li><a href="about.html">about</a></li>
+						<li><a href="stores.html">stores</a></li>
+					</ul>
 			</div>
 			<div class="center">
 				<p class="title">Welcome to <span id="lobo">foodseeker</span></p>
@@ -30,8 +29,10 @@
 				<form class="sbar" id ="submitform">
 					<input type='text' id='Input' placeholder='What are you in the mood for?'>
 					<input type='button' id='button' value="Send" onclick="getLocation()">
+					<input type='button' id='button2' value="Send" onclick="search()">
 				</form>
 				<p id="errorshow"></p>
+				<input type='button' id="autobutton" value="Manual Location Input?" onclick="manual()">
 				<p id="testing"></p>
 				<script>
 					var errorshow = document.getElementById('errorshow');
@@ -42,14 +43,14 @@
 					    } else {
 					        errorshow.innerHTML = "Geolocation is not supported by this browser.";
 					    }
-					    search();
 					}
 					function showPosition(position) {
+						$(errorshow).fadeIn(400);
 					    errorshow.innerHTML = "Latitude: " + position.coords.latitude + 
 					    "<br>Longitude: " + position.coords.longitude; 
+					    search();
 					}
 					function showError(error) {
-						//errorshow.style.display="block";
 					    switch(error.code) {
 					        case error.PERMISSION_DENIED:
 					            errorshow.innerHTML = "User or browser denied the request for Geolocation. Please try again."
@@ -64,7 +65,20 @@
 					            errorshow.innerHTML = "An unknown error occurred."
 					            break;
 					    }
-					    $(errorshow).fadeIn(400, askloc());
+					    var autobutton = document.getElementById('autobutton');
+					    $(autobutton).fadeIn(400);
+					    $(errorshow).fadeIn(400);
+					}
+					function manual(){
+						errorshow.innerHTML="Manual Input Mode";
+						$(autobutton).fadeOut(400);
+						var input_field = document.getElementById('Input');
+						input_field.placeholder="Please enter your City and State.";
+						input_field.value="";
+						var but1 = document.getElementById('button');
+						var but2 = document.getElementById('button2');
+						$(but1).fadeOut(0);
+						$(but2).fadeIn(0);
 					}
 				</script>
 				<script>
@@ -73,11 +87,23 @@
 						var text  ="";
 							text+= search_input.elements[0].value;
 						document.getElementById("testing").innerHTML = text;
+
 					}
 					function askloc(){
-						//email parents or something about going to chicago
+						
 					}
+					function oauth(){
+						var oauth_consumer_key=mY7J5hvTUPX7NTLRAZ7TVg;
+						var oauth_token=7sbA81Z0sHv7VCacqNQQI2sZGetyxVja;
+						var xmlhttp
+						if(window.XMLHttpRequest){
+							xmlhttp=new XMLHttpRequest();
+						}
+						else{
+							xmlhttp=new ActiveXObject("Miscrosoft.XMLHTTP");
+						}
 
+					}
 
 				</script>
 			</div>

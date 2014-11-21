@@ -19,6 +19,7 @@ p{
 	float:right;
 	margin-top:0;
 	list-style:none;
+	padding:0;
 }
 .nav li{
 	display:inline-block;
@@ -37,6 +38,7 @@ p{
 	color:white;
 	text-decoration:none;
 }
+
 .center{
 	text-align:center;
 	margin-top:180px;
@@ -79,6 +81,17 @@ input[type=button]{
 	font-weight:bold;
 	color:#575757;
 }
+#button2{
+	display:none;
+}
+#autobutton{
+	background-color:transparent;
+	border:0;
+	cursor:pointer;
+	outline:none;
+	display:none;
+	color:#101010;
+}
 #Input{
 	margin-top:10px;
 }
@@ -94,13 +107,6 @@ input[type=button]{
 	font-family:'Lobster';
 	margin-left:10px;
 	font-size:110%;
-}
-#demo{
-	height:100px;
-	width:100px;
-	background-color:orange;
-	margin-left:auto;
-	margin-right:auto;
 }
 #errorshow{
 	display:none;
@@ -152,4 +158,30 @@ input[type=button]{
 }
 .category{
 	font-style:italic;
+}
+
+
+@media print, screen and (max-width:800px) {
+	.center{
+		margin-top:20px;
+	}
+	input[type=text]{
+	width:80%;
+	}
+	input[type=button]{
+
+	}
+	#errorshow{
+		width:80%;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	.nav li{
+		width:60px;
+	}
+	.nav li a{
+		margin-left:10px;
+	}
+
+
 }
