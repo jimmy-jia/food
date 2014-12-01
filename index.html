@@ -53,6 +53,8 @@
 					var autobutton = document.getElementById('autobutton');
 					var geobutton = document.getElementById('geobutton');
 					var smethod = 0;
+					var lat=0;
+					var lon=0;
 					var category;
 					function getLocation() {
 						category=document.getElementById('Input').value;
@@ -68,6 +70,8 @@
 					    errorshow.innerHTML = "Latitude: " + position.coords.latitude + 
 					    "<br>Longitude: " + position.coords.longitude; 
 					    smethod=1;
+					    lat=position.coords.latitude;
+					    lon=position.coords.longitude;
 					    search();
 					}
 					function showError(error) {
@@ -103,10 +107,9 @@
 					}
 					function search(){
 						if (smethod==1){
-							navigator.geolocation.getCurrentPosition();
 							cll={
-								'latitude' : position.coords.latitude, 
-								'longitude' : position.coords.longitude
+								'latitude' : lat, 
+								'longitude' : lon
 							}
 						}
 						else if (smethod==0){
