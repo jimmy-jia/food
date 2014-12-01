@@ -1,6 +1,7 @@
 body{
 	width:100%;
 	height:100%;
+	background-color:#EDEBED;
 	background-image:url('food.jpg');
 	margin:0;
 	padding:0;
@@ -12,7 +13,7 @@ p{
 .top{
 	width:100%;
 	height:50px;
-	background-color:#00cdef;
+	background-color:#00bbef;
 	border-bottom:1px solid #00bbdd;
 }
 .nav{
@@ -29,11 +30,11 @@ p{
 	transition: background-color .4s;
 }
 .nav li:hover{
-	background-color:#00bbdd;
+	background-color:#00aacc;
 }
 .nav li a{
 	position:absolute;
-	margin-top:13px;
+	margin-top:14px;
 	margin-left:20px;
 	color:white;
 	text-decoration:none;
@@ -84,7 +85,7 @@ input[type=button]{
 #button2{
 	display:none;
 }
-#autobutton{
+#autobutton, #geobutton{
 	background-color:transparent;
 	border:0;
 	cursor:pointer;
@@ -99,6 +100,7 @@ input[type=button]{
 	font-family:'Lobster';
 	text-decoration:none;
 	font-size:200%;
+	margin-top:2px;
 	margin-left:15px;
 	color:white;
 	transition:color .4s;
@@ -113,7 +115,7 @@ input[type=button]{
 	margin-top:30px;
 }
 #logo:hover{
-	color:#ffaaaa;
+	color:#eeccff;
 	text-shadow:1px 0px #66aaff;
 }
 /*Flex*/

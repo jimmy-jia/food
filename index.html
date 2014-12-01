@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Food @ Champaign-Urbana</title>
+		<title>foodseeker</title>
 		<meta charset="utf-8">
 		<link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -11,32 +11,51 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+        <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+        <script type="text/javascript">
+        	var auth = {
+                consumerKey : "mY7J5hvTUPX7NTLRAZ7TVg",
+                consumerSecret : "JkqVm7VWhUejIIVDLjHBQI2Pa_k",
+                accessToken : "7sbA81Z0sHv7VCacqNQQI2sZGetyxVja",
+                accessTokenSecret : "xW6Xj9-PVHyfqxJoHAGLajtkqjI",
+                serviceProvider : {
+                    signatureMethod : "HMAC-SHA1"
+                }
+            };
+        </script>
 	</head>
 	<body>
 		<div class="wrapper">
 			<div class="top">
 				<a href="index.html" id="logo">foodseeker</a>
-					<ul class="nav">
-						<li><a href="#">home</a></li>
-						<li><a href="about.html">about</a></li>
-						<li><a href="stores.html">stores</a></li>
-					</ul>
+				<ul class="nav">
+					<li><a href="index.html">home</a></li>
+					<li><a href="about.html">about</a></li>
+					<li><a href="stores.html">stores</a></li>
+				</ul>
 			</div>
 			<div class="center">
 				<p class="title">Welcome to <span id="lobo">foodseeker</span></p>
 				<p class="subtitle">Seeking food in Urbana-Champaign</p>
 				<p class="help">No idea what to eat? Don't worry, we got you.</p>
 				<form class="sbar" id ="submitform">
-					<input type='text' id='Input' placeholder='What are you in the mood for?'>
+					<input type='text' id='Input' placeholder='What are you in the mood for?' onsubmit="return false">
 					<input type='button' id='button' value="Send" onclick="getLocation()">
 					<input type='button' id='button2' value="Send" onclick="search()">
 				</form>
 				<p id="errorshow"></p>
 				<input type='button' id="autobutton" value="Manual Location Input?" onclick="manual()">
+				<input type='button' id="geobutton" value="Return to Geolocation Input?" onclick="georeturn()">
 				<p id="testing"></p>
 				<script>
 					var errorshow = document.getElementById('errorshow');
+					var autobutton = document.getElementById('autobutton');
+					var geobutton = document.getElementById('geobutton');
+					var smethod = 0;
+					var category;
 					function getLocation() {
+						category=document.getElementById('Input').value;
 						$(errorshow).fadeOut(400);
 					    if (navigator.geolocation) {
 					        navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -48,6 +67,7 @@
 						$(errorshow).fadeIn(400);
 					    errorshow.innerHTML = "Latitude: " + position.coords.latitude + 
 					    "<br>Longitude: " + position.coords.longitude; 
+					    smethod=1;
 					    search();
 					}
 					function showError(error) {
@@ -65,13 +85,13 @@
 					            errorshow.innerHTML = "An unknown error occurred."
 					            break;
 					    }
-					    var autobutton = document.getElementById('autobutton');
+					    
 					    $(autobutton).fadeIn(400);
 					    $(errorshow).fadeIn(400);
 					}
 					function manual(){
 						errorshow.innerHTML="Manual Input Mode";
-						$(autobutton).fadeOut(400);
+						
 						var input_field = document.getElementById('Input');
 						input_field.placeholder="Please enter your City and State.";
 						input_field.value="";
@@ -79,38 +99,61 @@
 						var but2 = document.getElementById('button2');
 						$(but1).fadeOut(0);
 						$(but2).fadeIn(0);
+						autobutton.value="";
 					}
-				</script>
-				<script>
 					function search(){
-						var search_input=document.getElementById('submitform');
-						var text  ="";
-							text+= search_input.elements[0].value;
-						document.getElementById("testing").innerHTML = text;
-
-					}
-					function askloc(){
-						
-					}
-					function oauth(){
-						var oauth_consumer_key=mY7J5hvTUPX7NTLRAZ7TVg;
-						var oauth_token=7sbA81Z0sHv7VCacqNQQI2sZGetyxVja;
-						var xmlhttp
-						if(window.XMLHttpRequest){
-							xmlhttp=new XMLHttpRequest();
+						if (smethod==1){
+							cll={
+								'latitude' : position.coords.latitude, 
+								'longitude' : position.coords.longitude
+							}
 						}
-						else{
-							xmlhttp=new ActiveXObject("Miscrosoft.XMLHTTP");
+						else if (smethod==0){
+							var loc=document.getElementById('Input').value;
 						}
+						var accessor={
+							consumerSecret : auth.consumerSecret,
+							tokenSecret : auth.accessTokenSecret
+						};
+						parameters=[];
+						parameters.push(['term', category]);
+						if (smethod==1){
+							parameters.push(['cll', cll]);
+						}
+						else if (smethod==0){
+							parameters.push(['location', loc]);
+						}
+			            //parameters.push(['callback', 'cb']);
+            			parameters.push(['oauth_consumer_key', auth.consumerKey]);
+            			parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
+            			parameters.push(['oauth_token', auth.accessToken]);
+            			parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
 
+            			var message={
+            				'action' : 'http://api.yelp.com/v2/search',
+            				'method' : 'GET',
+            				'parameters' : parameters
+            			};
+
+            			alert(parameters);
+
+            			OAuth.setTimestampAndNonce(message);
+            			OAuth.SignatureMethod.sign(message, accessor);
+            			var parameterMap = OAuth.getParameterMap(message.parameters);
+            			console.log(parameterMap);
+            			$.ajax({
+            				'url' : message.action,
+            				'data' : parameterMap,
+            				'dataType' : 'jsonp',
+            				'jsonpCallback' : 'cb',
+            				'success' : function(data, textStats, XMLHttpRequest){
+            					console.log(data);
+            				}
+            			});
+					return 0;
 					}
-
 				</script>
 			</div>
-
-
 		</div>
-
-
 	</body>
 </html>
