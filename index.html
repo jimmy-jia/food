@@ -103,6 +103,7 @@
 					}
 					function search(){
 						if (smethod==1){
+							navigator.geolocation.getCurrentPosition();
 							cll={
 								'latitude' : position.coords.latitude, 
 								'longitude' : position.coords.longitude
