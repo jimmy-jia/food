@@ -6,6 +6,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="depend/sweet-alert.css">
 		<link href="stylesheet.css" rel="stylesheet" type="text/css">
 		<link rel="icon" href="favicon.ico">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,16 @@
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 		<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
         <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+        <script src="depend/sweet-alert.min.js"></script>
         <script type="text/javascript">
+        	function pgload() {
+        		swal({
+        			title: "Work In Progress!", 
+        			text: "This is a site in progress, updates coming soon", 
+        			type:"info",
+        			confirmButtonColor: "#00bbef"
+        		});
+        	};
         	var auth = {
                 consumerKey : "mY7J5hvTUPX7NTLRAZ7TVg",
                 consumerSecret : "JkqVm7VWhUejIIVDLjHBQI2Pa_k",
@@ -56,6 +66,7 @@
 					var lat=0;
 					var lon=0;
 					var category;
+					window.onload=pgload;
 					function getLocation() {
 						category=document.getElementById('Input').value;
 						$(errorshow).fadeOut(400);
@@ -77,23 +88,24 @@
 					function showError(error) {
 					    switch(error.code) {
 					        case error.PERMISSION_DENIED:
-					            errorshow.innerHTML = "User or browser denied the request for Geolocation. Please try again."
+					            swal("Error", "User or browser denied the request for Geolocation. Please try again.", "error")
 					            break;
 					        case error.POSITION_UNAVAILABLE:
-					            errorshow.innerHTML = "Location information is unavailable."
+					            swal("Error", "Location information is unavailable.", "error")
 					            break;
 					        case error.TIMEOUT:
-					            errorshow.innerHTML = "The request to get user location timed out."
+					            swal("Error", "The request to get user location timed out.", "error")
 					            break;
 					        case error.UNKNOWN_ERROR:
-					            errorshow.innerHTML = "An unknown error occurred."
+					            swal("Error", "An unknown error occurred.", "error")
 					            break;
 					    }
-					    
+					    //errorshow.innerHTML = 
 					    $(autobutton).fadeIn(400);
-					    $(errorshow).fadeIn(400);
+					    //$(errorshow).fadeIn(400);
 					}
 					function manual(){
+						$(errorshow).fadeIn(400);
 						errorshow.innerHTML="Manual Input Mode";
 						
 						var input_field = document.getElementById('Input');
@@ -107,10 +119,7 @@
 					}
 					function search(){
 						if (smethod==1){
-							cll={
-								'latitude' : lat, 
-								'longitude' : lon
-							}
+							cll=[lat, lon];
 						}
 						else if (smethod==0){
 							var loc=document.getElementById('Input').value;
@@ -139,7 +148,7 @@
             				'parameters' : parameters
             			};
 
-            			alert(parameters);
+            			swal("Parameters", parameters);
 
             			OAuth.setTimestampAndNonce(message);
             			OAuth.SignatureMethod.sign(message, accessor);
