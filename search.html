@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title>foodseeker</title>
+		<meta name="description" content="Find a place to eat!">
+		<meta name="keywords" content="yelp api finding places to eat place eating find food seek seeker seeking">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta charset="utf-8">
+		<link href="stylesheet.css" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400|Open+Sans+Condensed:300|Lato|Montserrat|Source+Sans+Pro:400,700italic|Varela|Poiret One|Lobster' rel='stylesheet' type='text/css'>
+		<link rel="icon" href="favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="sha1.js"></script>
+		<script src="oauth.js"></script>
+		<script src="seek.js"></script>
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	</head>
+	<body>
+		<header>
+			<a class="logo" href="index.html">foodseeker</a>
+			<nav>
+				<a href="index.html">Home</a>
+				<a href="about.html">About</a>
+				<a href=""></a>
+			</nav>
+		</header>
+		<div class="wrapper">
+			<div class="options">
+				<div id="displaylist">
+				</div>
+				<div class="optionbox" id="slideup">
+					<p>Options</p>
+					<a id="options-close" onclick="closeoptions()">x</a>
+					<input id="type" placeholder="What kind of cuisine?"/>
+					<input type="text" id="amount" readonly>
+					<div id="distance"></div>
+					<input id="location" placeholder="Location?"/>
+					<a onclick="geolocate()" class="geo"></a>
+					<a class="findfood" onclick="foodfinder()">Find me food!</a>
+				</div>
+			</div>
+		</wrapper>
+
+		<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"></link>
+		<script>
+			$(function(){
+				var availableTags=[
+				"chinese", "japanese", "korean", "italian", "indian", "american", "burgers", "bbq", "foodstand", "vietnamese", "steak", "bar", "mexican", "american", "fusion", "filipino", "buffet", "pizza", "irish", "mediterranian", "southern", "cajun", "soul"];
+				$('#type').autocomplete({source: availableTags});
+			});
+			function closeoptions(){
+				$('#slideup').slideUp(400);
+			}
+			$(function() {
+				$( "#distance" ).slider({
+					range: "min",
+					value: 5,
+					min: 1,
+					max: 25,
+					slide: function( event, ui ) {
+						console.log(ui.value)
+						if(ui.value==1)
+							$( "#amount" ).val("Max Distance: "+ ui.value +" mile");
+						else
+							$( "#amount" ).val("Max Distance: "+ ui.value +" miles");
+					}
+				});
+				$( "#amount" ).val( "Max Distance: "+$( "#distance" ).slider( "value" )+" miles");
+			});
+		</script>
+	</body>
+</html>

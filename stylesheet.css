@@ -1,189 +1,241 @@
-body{
-	width:100%;
-	height:100%;
-	background-color:#EDEBED;
-	background-image:url('food.jpg');
-	margin:0;
-	padding:0;
-	font-family:'Helvetica';
-}
-p{
-	margin:0;
-}
-.top{
-	width:100%;
-	height:50px;
-	background-color:#00bbef;
-	border-bottom:1px solid #00bbdd;
-}
-.nav{
-	float:right;
-	margin-top:0;
-	list-style:none;
-	padding:0;
-}
-.nav li{
-	display:inline-block;
-	width:80px;
-	height:50px;
-	margin-left:-5px;
-	transition: background-color .4s;
-}
-.nav li:hover{
-	background-color:#00aacc;
-}
-.nav li a{
-	position:absolute;
-	margin-top:14px;
-	margin-left:20px;
-	color:white;
-	text-decoration:none;
-}
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+body, html {
+  width: 100%;
+  padding: 0;
+  margin: 0; }
 
-.center{
-	text-align:center;
-	margin-top:180px;
-}
-.title{
-	font-family:'Lato';
-	font-size:300%;
-}
-.subtitle{
-	margin-top:20px;
-	font-size:150%;
-}
-.help{
-	margin:10px;
-}
-.about{
-	margin-top:20px;
-	width:650px;
-	margin-left:auto;
-	margin-right:auto;
-}
-.stores{
-	margin-top:-100px;
-}
-input[type=text]{
-	height:35px;
-	width:500px;
-	background-color:#f2f2f2;
-	border:2px solid #e7e7e7;
-	border-radius:3px;
-	font-weight:bold;
-	color:#575757;
-	text-align:center;
-}
-input[type=button]{
-	height:41px;
-	background-color:#f2f2f2;
-	border:2px solid #e7e7e7;
-	border-radius:3px;
-	font-weight:bold;
-	color:#575757;
-}
-#button2{
-	display:none;
-}
-#autobutton, #geobutton{
-	background-color:transparent;
-	border:0;
-	cursor:pointer;
-	outline:none;
-	display:none;
-	color:#101010;
-}
-#Input{
-	margin-top:10px;
-}
-#logo{
-	font-family:'Lobster';
-	text-decoration:none;
-	font-size:200%;
-	margin-top:2px;
-	margin-left:15px;
-	color:white;
-	transition:color .4s;
-}
-#lobo{
-	font-family:'Lobster';
-	margin-left:10px;
-	font-size:110%;
-}
-#errorshow{
-	display:none;
-	margin-top:30px;
-}
-#logo:hover{
-	color:#eeccff;
-	text-shadow:1px 0px #66aaff;
-}
-/*Flex*/
-.flexbox{
-	margin-top:20px;
-	width:40%;
-	height:auto;
-	display:-webkit-box;
-	display:-webkit-flex;
-	display:-ms-flexbox;
-	display:flex;
-	-webkit-flex-wrap:wrap;
-	    -ms-flex-wrap:wrap;
-	        flex-wrap:wrap;
-	-webkit-box-pack:center;
-	-webkit-justify-content:center;
-	    -ms-flex-pack:center;
-	        justify-content:center;
-	-webkit-box-align:start;
-	-webkit-align-items:flex-start;
-	    -ms-flex-align:start;
-	        align-items:flex-start;
-	-webkit-align-content:space-between;
-	    -ms-flex-line-pack:justify;
-	        align-content:space-between;
-	margin-left:auto;
-	margin-right:auto;
-}
-.flexitem{
-	text-align:center;
-	width:250px;
-	height:150px;
-	margin:auto;
-	background-color:#33cdee;
-	background-color:rgba(33, 200, 230, .5);
-	border-radius:5px;
-	margin-top:5px;
-}
-.storen{
-	font-size:125%;
-	padding-top:5px;
-}
-.category{
-	font-style:italic;
-}
+* {
+  box-sizing: border-box; }
 
+a {
+  text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  color: #F44336;
+  transition: color 0.4s; }
+  a:hover {
+    color: #f1f1f1; }
 
-@media print, screen and (max-width:800px) {
-	.center{
-		margin-top:20px;
-	}
-	input[type=text]{
-	width:80%;
-	}
-	input[type=button]{
+p {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6; }
 
-	}
-	#errorshow{
-		width:80%;
-		margin-left:auto;
-		margin-right:auto;
-	}
-	.nav li{
-		width:60px;
-	}
-	.nav li a{
-		margin-left:10px;
-	}
+.logofont {
+  font-family: "Lobster", sans-serif; }
 
+.wrapper {
+  background-color: #e5e3e1;
+  height: 100%;
+  margin-bottom: -60px; }
 
-}
+.heading {
+  text-align: center;
+  font-size: 1.5em;
+  font-family: "Varela", Arial;
+  margin: 1em auto; }
+
+.bodytext {
+  max-width: 100%;
+  width: 800px;
+  margin: 0 auto; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: normal; }
+
+header {
+  background-color: #2c3e50;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+  padding: 15px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 5; }
+  header > a {
+    color: #F44336;
+    text-shadow: 1px 1px 1px #B71C1C; }
+
+.logo {
+  font-family: "Lobster", sans-serif;
+  font-size: 2em;
+  margin-left: 15px; }
+
+nav {
+  padding-top: 10px;
+  float: right;
+  right: 0; }
+  nav a {
+    margin-right: 15px;
+    transition: border-bottom 0.4s color 0.4s; }
+    nav a:hover {
+      color: #f1f1f1;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #f1f1f1; }
+
+.banner {
+  padding-top: 220px;
+  padding-bottom: 100px;
+  background-color: #2196F3;
+  color: #f1f1f1;
+  text-align: center;
+  font-family: "Open Sans Condensed", sans-serif;
+  text-shadow: 1px 1px 1px #B71C1C;
+  background-image: url(https://static.pexels.com/photos/3760/restaurant-man-person-coffee.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%; }
+  .banner h1 {
+    font-size: 3em; }
+  .banner .logofont {
+    font-size: 1.15em;
+    padding-left: 5px;
+    color: #F44336; }
+  .banner p {
+    font-size: 1.5em;
+    font-family: "Open Sans Condensed", sans-serif; }
+
+.info {
+  padding-top: 50px; }
+  .info h3 {
+    font-size: 1.6em;
+    color: #F44336; }
+  .info p {
+    text-align: center; }
+
+.letsgo {
+  background-color: #F44336;
+  padding: 15px 25px;
+  border: none;
+  margin: 0 auto;
+  margin-top: 40px;
+  display: block;
+  width: 200px;
+  color: #f1f1f1;
+  font-size: 2.5em;
+  font-family: "Source Sans Pro";
+  border: 2px solid transparent;
+  border-radius: 3px;
+  transition: background-color 0.4s, color 0.4s, border 0.4s; }
+  .letsgo:hover {
+    background-color: #B71C1C;
+    border: 2px solid #B71C1C; }
+  .letsgo:active, .letsgo:focus {
+    outline: none; }
+
+.push {
+  height: 60px; }
+
+footer {
+  color: #f1f1f1;
+  height: 60px;
+  padding: 20px;
+  font-family: "Open Sans Condensed", sans-serif;
+  text-align: center;
+  background-color: #2c3e50; }
+  footer span {
+    font-size: 1.25em;
+    font-weight: 100;
+    margin-right: 5px; }
+
+.options {
+  padding-top: 65px; }
+  .options p:first-child {
+    font-size: 3em;
+    text-align: center;
+    font-family: "Lato";
+    color: #F44336;
+    font-style: italic; }
+
+.optionbox {
+  width: 300px;
+  position: fixed;
+  left: 0;
+  top: 70px;
+  height: 100%;
+  background-color: #2c3e50; }
+
+input, select, .findfood {
+  padding: 15px 20px;
+  border-radius: 3px;
+  border: none;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 20px;
+  width: 240px; }
+
+#options-close {
+  position: absolute;
+  right: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5em;
+  top: 5px;
+  color: #F44336; }
+  #options-close:hover {
+    cursor: pointer; }
+
+.findfood {
+  background-color: #F44336;
+  color: white;
+  transition: background-color 0.4s;
+  text-align: center; }
+  .findfood:hover {
+    background-color: #B71C1C;
+    cursor: pointer; }
+
+#displaylist {
+  width: calc(100% - 300px);
+  float: right; }
+  #displaylist div {
+    width: 100%;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #777;
+    border-top: 1px solid #ccc; }
+    #displaylist div a {
+      font-size: 2em;
+      color: #F44336;
+      font-family: "Source Sans Pro"; }
+      #displaylist div a:hover {
+        color: #B71C1C; }
+    #displaylist div p {
+      padding: 0; }
+    #displaylist div img {
+      display: block; }
+
+#amount {
+  padding: 0;
+  width: auto;
+  background-color: transparent;
+  color: #F44336;
+  font-weight: bold; }
+
+#distance {
+  margin: 30px;
+  border: 0;
+  .ui-slider-handle-border-radius: 50% !important;
+  .ui-slider-handle-background-color: #F44336; }
+  #distance .ui-slider-range {
+    background: #F44336; }
+
+.geo {
+  position: relative;
+  top: -57px;
+  left: 235px;
+  width: 30px;
+  height: 30px;
+  background-image: url(locate.svg);
+  background-size: cover;
+  content: " ";
+  display: block; }
+  .geo:hover {
+    cursor: pointer; }
+
+/*# sourceMappingURL=stylesheet.css.map */

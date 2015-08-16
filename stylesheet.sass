@@ -1,0 +1,293 @@
+// Variables //
+
+$main: #2196F3
+$main-dark: #2c3e50
+
+$second: #F44336
+$second-dark: #B71C1C
+$white: #f1f1f1
+$black: #212121
+$grey: #545
+$logofont: 'Lobster', sans-serif
+$bodyfont: 'Open Sans', sans-serif
+$headingfont: 'Montserrat', sans-serif
+$condensed: 'Open Sans Condensed', sans-serif
+
+// Mixins //
+
+@mixin card($depth)
+	@if $depth < 1
+		box-shadow: none
+	@else if $depth > 5
+		@warn "Invalid Depth"
+	@else
+		box-shadow: bottom-shadow($depth), top-shadow($depth)
+@function top-shadow($depth)
+	$primary-offset: nth(1.5 3 10 14 19, $depth) * 1px
+	$blur: nth(1.5 3 10 14 19, $depth) * 4px
+	$color: rgba(black, nth(.12 .16 .19 .25 .30, $depth))
+	@return 0 $primary-offset $blur $color
+@function bottom-shadow($depth)
+	$primary-offset: nth(1.5 3 6 10 15, $depth) * 1px
+	$blur: nth(1 3 3 5 6, $depth) * 4px
+	$color: rgba(black, nth(.24 .23 .23 .22 .22, $depth))
+	@return 0 $primary-offset $blur $color
+
+
+// Animations //
+
+
+@-moz-keyframes spin
+	100%
+		-moz-transform: rotate(360deg)
+@-webkit-keyframes spin
+	100%
+		-webkit-transform: rotate(360deg)
+@keyframes spin
+	100%
+		-webkit-transform: rotate(360deg)
+		transform: rotate(360deg)
+
+
+/////////
+// CSS //
+/////////
+
+
+
+
+// Main //
+
+body, html
+	width: 100%
+	padding: 0
+	margin: 0
+
+*
+	box-sizing: border-box
+a
+	text-decoration: none
+	font-family: $bodyfont
+	color: $second
+	transition: color .4s
+	&:hover
+		color: $white
+
+p
+	margin: 0
+	font-family: $bodyfont
+	line-height: 1.6
+
+.logofont
+	font-family: $logofont
+
+.wrapper
+	background-color: #e5e3e1
+	height: 100%
+	margin-bottom: -60px
+.heading
+	text-align: center
+	font-size: 1.5em
+	font-family: 'Varela', Arial
+	margin: 1em auto
+.bodytext
+	max-width: 100%
+	width: 800px
+	margin: 0 auto
+
+h1, h2, h3, h4, h5, h6
+	margin: 0
+	font-weight: normal
+
+
+// Header //
+
+header
+	background-color: $main-dark
+	@include card(1)
+	padding: 15px 0
+	position: fixed
+	width: 100%
+	z-index: 5
+	> a
+		color: $second
+		text-shadow: 1px 1px 1px $second-dark
+
+.logo
+	font-family: $logofont
+	font-size: 2em
+	margin-left: 15px
+
+nav
+	padding-top: 10px
+	float: right
+	right: 0
+	a
+		margin-right: 15px
+		transition: border-bottom .4s color .4s
+		&:hover
+			color: $white
+			padding-bottom: 20px
+			border-bottom: 3px solid $white
+
+
+
+// Index //
+
+.banner
+	padding-top: 220px
+	padding-bottom: 100px
+	background-color: $main
+	color: $white
+	text-align: center
+	font-family: $condensed
+	text-shadow: 1px 1px 1px $second-dark
+	background-image: url(https://static.pexels.com/photos/3760/restaurant-man-person-coffee.jpeg)
+	background-repeat: no-repeat
+	background-position: center
+	background-size: 100%
+	h1
+		font-size: 3em
+	.logofont
+		font-size: 1.15em
+		padding-left: 5px
+		color: $second
+	p
+		font-size: 1.5em
+		font-family: $condensed
+.info
+	padding-top: 50px
+	h3
+		font-size: 1.6em
+		color: $second
+	p
+		text-align: center
+
+.letsgo
+	background-color: $second
+	padding: 15px 25px
+	border: none
+	margin: 0 auto
+	margin-top: 40px
+	display: block
+	width: 200px
+	color: $white
+	font-size: 2.5em
+	font-family: 'Source Sans Pro'
+	border: 2px solid transparent
+	border-radius: 3px
+	transition: background-color .4s, color .4s, border .4s
+	&:hover
+		background-color: $second-dark
+		border: 2px solid $second-dark
+	&:active, &:focus
+		outline: none
+// Footer //
+.push
+	height: 60px
+footer
+	color: $white
+	height: 60px
+	padding: 20px
+	font-family: $condensed
+	text-align: center
+	background-color: $main-dark
+	span
+		font-size: 1.25em
+		font-weight: 100
+		margin-right: 5px
+
+
+
+
+// Search //
+
+.options
+	padding-top: 65px
+	p:first-child
+		font-size: 3em
+		text-align: center
+		font-family: 'Lato'
+		color: $second
+		font-style: italic
+
+.optionbox
+	width: 300px
+	position: fixed
+	left: 0
+	top: 70px
+	height: 100%
+	background-color: $main-dark
+input, select, .findfood
+	padding: 15px 20px
+	border-radius: 3px
+	border: none
+	margin: 0 auto
+	display: block
+	margin-bottom: 20px
+	width: 240px
+
+#options-close
+	position: absolute
+	right: 10px
+	font-family: 'Montserrat', sans-serif
+	font-size: 1.5em
+	top: 5px
+	color: $second
+	&:hover
+		cursor: pointer
+.findfood
+	background-color: $second
+	color: white
+	transition: background-color .4s
+	text-align: center
+	&:hover
+		background-color: $second-dark
+		cursor: pointer
+
+#displaylist
+	width: calc(100% - 300px)
+	float: right
+	div
+		width: 100%
+		padding: 20px
+		background-color: #f1f1f1
+		border-bottom: 1px solid #777
+		border-top: 1px solid #ccc
+		a
+			font-size: 2em
+			color: $second
+			font-family: 'Source Sans Pro'
+			&:hover
+				color: $second-dark
+		p
+			padding: 0
+		img
+			display: block
+#amount
+	padding: 0
+	width: auto
+	background-color: transparent
+	color: $second
+	font-weight: bold
+#distance
+	margin: 30px
+	border: 0
+	.ui-slider-range
+		background: $second
+	.ui-slider-handle:
+		border-radius: 50% !important
+		background-color: $second
+
+.geo
+	position: relative
+	top: -57px
+	left: 235px
+	width: 30px
+	height: 30px
+	background-image: url(locate.svg)
+	background-size: cover
+	content: " "
+	display: block
+	&:hover
+		cursor: pointer

@@ -11,6 +11,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		<script src="https://maps.googleapis.com/maps/api/js"></script>
+		<script>
+			function initialize() {
+				var myLatlng = new google.maps.LatLng(40.1097, -88.2272)
+				var map_canvas = document.getElementById('map_canvas');
+				var map_options = {
+					center: myLatlng,
+					zoom: 14,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				}
+			var map = new google.maps.Map(map_canvas, map_options)
+			}
+			
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 	</head>
 	<body>
 		<div class="wrapper">
@@ -19,13 +35,11 @@
 				<ul class="nav">
 					<li><a href="index.html">home</a></li>
 					<li><a href="about.html">about</a></li>
-					<li><a href="#">map</a></li>
+					<li class="map"><a href="#">map</a></li>
 				</ul>
 			</div>
-			<div class="center">
-				<p class="title stores">Map</p>
-				<p class="subtitle">Here is a map of the Champaign-Urbana area</p>
-				<div id="mapcanvas">
+			<div class="centerm">
+				<div id="map_canvas">
 				</div>
 			</div>
 
