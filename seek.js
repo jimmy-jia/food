@@ -20,14 +20,15 @@ function foodfinder(){
     var terms = document.getElementById('type').value;
     var near = "champaign";
     var radius = $( "#distance" ).slider( "value" )*1600;
-    var cll=lat+","+lon;
+    
 
     parameters = [];
     parameters.push(['term', terms]);
-    if(loc)
+    parameters.push(['location', near]);
+    if(loc){
+        var cll=lat+","+lon;
         parameters.push(['cll', cll]);
-    else
-        parameters.push(['location', near]);
+    }
     parameters.push(['offset', offset]);
     parameters.push(['sort', 2]);
     parameters.push(['category_filter', 'restaurants']);
